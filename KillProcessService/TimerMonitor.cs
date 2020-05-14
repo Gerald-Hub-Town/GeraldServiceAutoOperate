@@ -11,9 +11,9 @@ namespace KillProcessService
     public class TimerMonitor
     {
         private readonly Timer _timer;
-        private string time1 = "1558";
-        private string time2 = "1612";
-        private string time3 = "1630";
+        private string time1 = "0900";
+        private string time2 = "1700";
+        private string time3 = "2100";
         public TimerMonitor()
         {
             _timer = new Timer(1000 * 50);

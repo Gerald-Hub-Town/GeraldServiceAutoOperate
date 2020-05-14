@@ -197,22 +197,24 @@ namespace GeraldServiceAutoOperate
                 string command2 = motherDrive;
                 string command3 = "cd " + sonDriver; // @"cd SourceCode(LUXSHARE)\Nancy\KillProcess\bin\debug"
                 string command4 = serviceExeName + " " + cmdFlag;
+                string command5 = string.Empty;
                 pro.StandardInput.WriteLine(command1);
                 pro.StandardInput.WriteLine(command2);
                 pro.StandardInput.WriteLine(command3);
                 pro.StandardInput.WriteLine(command4);
                 if (cmdFlag == "install")
                 {
-                    pro.StandardInput.WriteLine(serviceExeName + " " + "start");
+                    command5 = serviceExeName + " " + "start";
+                    pro.StandardInput.WriteLine(command5);
                 }
                 pro.StandardInput.WriteLine("&exit");
                 pro.StandardInput.AutoFlush = true;
                 pro.StandardInput.WriteLine("exit");
                 pro.WaitForExit();
                 excuteCmdFlag = true;
-                WriteToLog($"C:\\KillProcessLog-Own-{DateTime.Now.ToString("yyyyMMdd")}.txt", "Info", $"IP:{ip}---服务执行命令成功,执行命令--1.{command1} 2.{command2} 3.{command3} 4.{command4}", "");
+                WriteToLog($"C:\\KillProcessLog-Own-{DateTime.Now.ToString("yyyyMMdd")}.txt", "Info", $"IP:{ip}---服务执行命令成功,执行命令--1.{command1} 2.{command2} 3.{command3} 4.{command4} {command5}", "");
                 //WriteToLog($"\\10.32.36.230\\临时共享盘\\USB\\LuxKillProcess\\KillProcessLog-All-{DateTime.Now.ToString("yyyyMMdd")}.txt", "Info", $"IP:{ip}---服务执行命令成功,执行命令--1.{command1} 2.{command2} 3.{command3} 4.{command4}", "");
-               // _logger.Default.Process(new Log("Info", $"IP:{ip}---服务执行命令成功,执行命令--1.{command1} 2.{command2} 3.{command3} 4.{command4}", DateTime.Now, "LoadResourceFile"));
+                // _logger.Default.Process(new Log("Info", $"IP:{ip}---服务执行命令成功,执行命令--1.{command1} 2.{command2} 3.{command3} 4.{command4}", DateTime.Now, "LoadResourceFile"));
             }
             catch (Exception ex)
             {

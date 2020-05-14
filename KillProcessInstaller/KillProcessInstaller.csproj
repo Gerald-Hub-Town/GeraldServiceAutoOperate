@@ -76,7 +76,6 @@
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Resource\KillProcessService.exe" />
   </ItemGroup>
