@@ -19,7 +19,7 @@ namespace GeraldServiceAutoOperate.Common
         }
 
         public Logger Default { get; private set; }
-        public  Logger()
+        public Logger()
         {
             Default = new Logger(NLog.LogManager.GetCurrentClassLogger());
         }
@@ -97,7 +97,6 @@ namespace GeraldServiceAutoOperate.Common
         #endregion
 
         #region Custom
-
         public void Process(Log log)
         {
             var level = LogLevel.Info;
@@ -121,7 +120,6 @@ namespace GeraldServiceAutoOperate.Common
 
             _logger.Log(level, ei);
         }
-
         #endregion
 
         /// <summary>
@@ -145,8 +143,6 @@ namespace GeraldServiceAutoOperate.Common
 
         public override string ToString()
         {
-            //Message format
-            //Log Event: Logger='XXX' Level=Info Message='XXX' SequenceID=5
             return FormattedMessage;
         }
     }

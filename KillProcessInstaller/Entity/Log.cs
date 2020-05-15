@@ -9,9 +9,6 @@ namespace GeraldServiceAutoOperate.Entity
     public class Log
     {
         public long Id { get; set; }
-        /// <summary>
-        /// 日志级别 Trace|Debug|Info|Warn|Error|Fatal
-        /// </summary>
         public string Level { get; set; }
         public string Message { get; set; }
         public string Action { get; set; }

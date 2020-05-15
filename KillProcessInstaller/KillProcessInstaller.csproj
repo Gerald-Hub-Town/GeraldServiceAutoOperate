@@ -52,6 +52,7 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Speech" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -62,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Logger.cs" />
+    <Compile Include="Common\Speech.cs" />
     <Compile Include="Entity\Log.cs" />
     <Compile Include="Entity\ProcessInfo.cs" />
     <Compile Include="Entity\ServiceInfo.cs" />

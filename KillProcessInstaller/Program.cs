@@ -6,6 +6,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Speech.Recognition;
+using System.Speech.Synthesis;
+using System.Threading;
+using KillProcessInstaller.Common;
 
 namespace KillProcessInstaller
 {
