@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Logger.cs" />
+    <Compile Include="Common\OperateSharedFolder.cs" />
     <Compile Include="Common\Speech.cs" />
     <Compile Include="Entity\Log.cs" />
     <Compile Include="Entity\ProcessInfo.cs" />
