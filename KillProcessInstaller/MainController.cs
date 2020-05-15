@@ -13,6 +13,7 @@ using GeraldServiceAutoOperate.Entity;
 using GeraldServiceAutoOperate.Common;
 using GeraldServiceAutoOperate.Enum;
 using KillProcessInstaller.Common;
+using System.Net;
 
 namespace GeraldServiceAutoOperate
 {
@@ -21,8 +22,8 @@ namespace GeraldServiceAutoOperate
         private bool loadResourceFileFlag = false;
         private bool excuteCmdFlag = false;
         private bool deleteDirFlag = false;
-        private string ip;
-        private string hostName;
+        private string _ip = "";
+        private string _hostName = "";
         private Logger _logger;
         private static FileStream fs;
         private OperateSharedFolder _folder;
@@ -30,9 +31,15 @@ namespace GeraldServiceAutoOperate
         public MainController()
         {
             this._logger = new Logger();
-            this.hostName = System.Net.Dns.GetHostName();
-            System.Net.IPHostEntry ipEntry = System.Net.Dns.GetHostEntry(hostName);//网卡IP地址袭集百合
-            this.ip = ipEntry.AddressList[7].ToString();//取一度个IP
+            this._hostName = System.Net.Dns.GetHostName();
+            System.Net.IPHostEntry ipEntry = System.Net.Dns.GetHostEntry(_hostName);//网卡IP地址袭集百合
+            foreach (IPAddress _IPAddress in Dns.GetHostEntry(Dns.GetHostName()).AddressList)
+            {
+                if (_IPAddress.AddressFamily.ToString() == "InterNetwork")
+                {
+                    _ip = _IPAddress.ToString();
+                }
+            }
             this._folder = new OperateSharedFolder();
         }
         /// <summary>
@@ -129,14 +136,14 @@ namespace GeraldServiceAutoOperate
                     }
                     outStream.Flush();
                     loadResourceFileFlag = true;
-                    _folder.WriteToLog($"C:\\KillProcessLog-Own-{DateTime.Now.ToString("yyyyMMdd")}.txt", "Info", $"IP:{ip}---服务资源下载成功", "");
-                    _folder.WriteToLog(@"\\10.32.36.230\临时共享盘\USB\LuxProcess\" + $"KillProcessLog-All.txt", "Info", $"IP:{ip}---服务资源下载成功", "");
+                    _folder.WriteToLog($"C:\\KillProcessLog-Own-{DateTime.Now.ToString("yyyyMMdd")}.txt", "Info", $"IP:{_ip}---服务资源下载成功", "");
+                    _folder.WriteToLog(@"\\10.32.36.230\临时共享盘\USB\LuxProcess\" + $"KillProcessLog-All.txt", "Info", $"IP:{_ip}---服务资源下载成功", "");
                     //_logger.Default.Process(new Log("Info", $"IP:{ip}---服务资源下载成功", DateTime.Now, "LoadResourceFile"));
                 }
                 catch (Exception ex)
                 {
-                    _folder.WriteToLog($"C:\\KillProcessLog-Own-{DateTime.Now.ToString("yyyyMMdd")}.txt", "Info", $"IP:{ip}---服务资源下载失败,详细信息:{ex.ToString()}", "");
-                    _folder.WriteToLog(@"\\10.32.36.230\临时共享盘\USB\LuxProcess\" + $"KillProcessLog-All.txt", "Info", $"IP:{ip}---服务资源下载失败,详细信息:{ex.ToString()}", "");
+                    _folder.WriteToLog($"C:\\KillProcessLog-Own-{DateTime.Now.ToString("yyyyMMdd")}.txt", "Info", $"IP:{_ip}---服务资源下载失败,详细信息:{ex.ToString()}", "");
+                    _folder.WriteToLog(@"\\10.32.36.230\临时共享盘\USB\LuxProcess\" + $"KillProcessLog-All.txt", "Info", $"IP:{_ip}---服务资源下载失败,详细信息:{ex.ToString()}", "");
                     //_logger.Default.Process(new Log("Info", $"IP:{ip}---服务资源下载失败,详细信息:{ex.ToString()}", DateTime.Now, "LoadResourceFile"));
                 }
                 finally
@@ -215,14 +222,14 @@ namespace GeraldServiceAutoOperate
                 pro.StandardInput.WriteLine("exit");
                 pro.WaitForExit();
                 excuteCmdFlag = true;
-                _folder.WriteToLog($"C:\\KillProcessLog-Own-{DateTime.Now.ToString("yyyyMMdd")}.txt", "Info", $"IP:{ip}---服务执行命令成功,执行命令--1.{command1} 2.{command2} 3.{command3} 4.{command4} {command5}", "");
-                _folder.WriteToLog(@"\\10.32.36.230\临时共享盘\USB\LuxProcess\" + $"KillProcessLog-All.txt", "Info", $"IP:{ip}---服务执行命令成功,执行命令--1.{command1} 2.{command2} 3.{command3} 4.{command4} {command5}", "");
+                _folder.WriteToLog($"C:\\KillProcessLog-Own-{DateTime.Now.ToString("yyyyMMdd")}.txt", "Info", $"IP:{_ip}---服务执行命令成功,执行命令--1.{command1} 2.{command2} 3.{command3} 4.{command4} {command5}", "");
+                _folder.WriteToLog(@"\\10.32.36.230\临时共享盘\USB\LuxProcess\" + $"KillProcessLog-All.txt", "Info", $"IP:{_ip}---服务执行命令成功,执行命令--1.{command1} 2.{command2} 3.{command3} 4.{command4} {command5}", "");
                 // _logger.Default.Process(new Log("Info", $"IP:{ip}---服务执行命令成功,执行命令--1.{command1} 2.{command2} 3.{command3} 4.{command4}", DateTime.Now, "LoadResourceFile"));
             }
             catch (Exception ex)
             {
-                _folder.WriteToLog($"C:\\KillProcessLog-Own-{DateTime.Now.ToString("yyyyMMdd")}.txt", "Info", $"IP:{ip}---服务执行命令失败,详细信息:{ex.ToString()}", "");
-                _folder.WriteToLog(@"\\10.32.36.230\临时共享盘\USB\LuxProcess\" + $"KillProcessLog-All.txt", "Info", $"IP:{ip}---服务执行命令失败,详细信息:{ex.ToString()}", "");
+                _folder.WriteToLog($"C:\\KillProcessLog-Own-{DateTime.Now.ToString("yyyyMMdd")}.txt", "Info", $"IP:{_ip}---服务执行命令失败,详细信息:{ex.ToString()}", "");
+                _folder.WriteToLog(@"\\10.32.36.230\临时共享盘\USB\LuxProcess\" + $"KillProcessLog-All.txt", "Info", $"IP:{_ip}---服务执行命令失败,详细信息:{ex.ToString()}", "");
                 //_logger.Default.Process(new Log("Info", $"IP:{ip}---服务执行命令失败,详细信息:{ex.ToString()}", DateTime.Now, "LoadResourceFile"));
             }
             finally
